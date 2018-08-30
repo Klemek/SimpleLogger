@@ -167,8 +167,8 @@ public final class Logger {
      */
     private static void log(int depth, Level lvl, String message, Object... objects) {
         if(!initialized) {
-            Logger.log(Level.WARNING, "Logger was not initialized please do so before using.");
             initialized = true;
+            Logger.log(Level.WARNING, "Logger was not initialized please do so before using.");
         }
         message = String.format("[%s-%s] %s", appName, Utils.getCallingClassName(depth), message);
         appLogger.log(lvl, message, objects);
