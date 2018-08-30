@@ -1,10 +1,14 @@
 package fr.klemek.logger;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Simple logger for this application.
@@ -13,12 +17,13 @@ import java.util.logging.LogManager;
  */
 public final class Logger {
 
-    private static java.util.logging.Logger appLogger = java.util.logging.Logger.getLogger(Utils.getString("app_name","Unkown"));
-    private static final String APP_NAME = Utils.getString("app_name","Unkown");
-    private static final String BASE_PACKAGE = Utils.getString("default_package",null);
+    private static java.util.logging.Logger appLogger = java.util.logging.Logger.getLogger("Unknown");
+    private static String appName = "Unknown";
+    private static String basePackage = null;
+    private static boolean initialized = false;
     private static final int DEFAULT_DEPTH = 4;
 
-    private static boolean initialized = false;
+
 
     private Logger() {
     }
@@ -74,7 +79,19 @@ public final class Logger {
                 return;
             }
             LogManager.getLogManager().readConfiguration(is);
-            appLogger = java.util.logging.Logger.getLogger(APP_NAME);
+
+            appName = Utils.getString(relativePath, "app_name","Unknown");
+            basePackage = Utils.getString(relativePath, "default_package",null);
+            String outputFile = Utils.getString(relativePath, "output_file",null);
+
+            appLogger = java.util.logging.Logger.getLogger(appName);
+
+            if(outputFile != null){
+                Handler handler = new FileHandler(outputFile, true);
+                handler.setFormatter(new SimpleFormatter());
+                appLogger.addHandler(new FileHandler(outputFile, true));
+            }
+
         } catch (IOException e) {
             Logger.log(e);
         }
@@ -154,16 +171,16 @@ public final class Logger {
             Logger.log(Level.WARNING, "Logger was not initialized please do so before using.");
             initialized = true;
         }
-        message = String.format("[%s-%s] %s", APP_NAME, Utils.getCallingClassName(depth), message);
+        message = String.format("[%s-%s] %s", appName, Utils.getCallingClassName(depth), message);
         appLogger.log(lvl, message, objects);
         if (lvl == Level.SEVERE && objects.length > 0 && objects[0] instanceof Exception) {
             boolean inPackage = false;
             for (StackTraceElement ste : ((Exception) objects[0]).getStackTrace()) {
                 Logger.log(depth + 1, Level.SEVERE, "\t {0}", ste);
-                if(Logger.BASE_PACKAGE != null){
-                    if (!inPackage && ste.getClassName().startsWith(Logger.BASE_PACKAGE))
+                if(Logger.basePackage != null){
+                    if (!inPackage && ste.getClassName().startsWith(Logger.basePackage))
                         inPackage = true;
-                    else if (inPackage && !ste.getClassName().startsWith(Logger.BASE_PACKAGE))
+                    else if (inPackage && !ste.getClassName().startsWith(Logger.basePackage))
                         break;
                 }
             }

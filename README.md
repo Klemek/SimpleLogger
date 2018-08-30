@@ -1,11 +1,11 @@
 # Simple Logger
 A simple but useful Java logger to use everywhere.
 
-Current version v1.0
+Current version v1.1
 
 ## Download
 
-* [simple-logger-1.0.jar](../../raw/master/download/simple-logger-1.0.jar)
+* [simple-logger-1.1.jar](../../raw/master/download/simple-logger-1.1.jar)
 
 ## How to use
 
@@ -19,18 +19,20 @@ Logger.setLevel(Level.WARNING);
 
 Configuration file as follow (example) :
 ```
-#Parameters for good behavior
+# Parameters for good behavior
 handlers=java.util.logging.ConsoleHandler
 .level=WARNING
 java.util.logging.ConsoleHandler.formatter=java.util.logging.SimpleFormatter
 
-#Customize date/time shown with this line
+# Customize date/time shown with this line
 java.util.logging.SimpleFormatter.format=[%1$tF %1$tT][%4$s]%5$s %n
 
-#Specify your app name here
+# Specify your app name here
 app_name=YourApp
 # (Optional, specify your app package)
 default_package=com.your.app
+# (Optional, specify an output file pattern)
+output_file=output.log
 ```
 
 The default package works as follow : When logging stack trace of an error, it will stop when the package doesnt't match your app anymore. It helps having small and relevant stack trace in logs.
@@ -83,7 +85,7 @@ You can use this project as a maven dependency with this :
     <dependency>
         <groupId>fr.klemek</groupId>
         <artifactId>simple-logger</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </dependency>
 </dependencies>
 ```

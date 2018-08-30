@@ -13,8 +13,6 @@ import java.util.logging.Level;
  */
 final class Utils {
 
-    private static final ResourceBundle CONFIGURATION_BUNDLE = ResourceBundle.getBundle("logging");
-
     private Utils() {
     }
 
@@ -25,13 +23,15 @@ final class Utils {
     /**
      * Get a configuration string by its key.
      *
+     * @param bundlePath the path to the configuration file
      * @param key the key in the config file
      * @param defaultValue the default value to use if not found
      * @return the string or default value if not found
      */
-    static String getString(String key, String defaultValue) {
+    static String getString(String bundlePath, String key, String defaultValue) {
+        int pos = bundlePath.indexOf(".properties");
         try {
-            return CONFIGURATION_BUNDLE.getString(key);
+            return  ResourceBundle.getBundle(bundlePath.substring(0,pos)).getString(key);
         } catch (MissingResourceException e) {
             return defaultValue;
         }

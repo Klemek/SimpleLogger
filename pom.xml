@@ -6,13 +6,23 @@
 
     <groupId>fr.klemek</groupId>
     <artifactId>simple-logger</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <name>SimpleLogger</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <!-- Test Dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <outputDirectory>target/${project.artifactId}/WEB-INF/classes</outputDirectory>
