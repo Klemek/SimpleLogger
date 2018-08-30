@@ -1,6 +1,5 @@
 package fr.klemek.logger;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
@@ -89,7 +88,7 @@ public final class Logger {
             if(outputFile != null){
                 Handler handler = new FileHandler(outputFile, true);
                 handler.setFormatter(new SimpleFormatter());
-                appLogger.addHandler(new FileHandler(outputFile, true));
+                appLogger.addHandler(handler);
             }
 
         } catch (IOException e) {
