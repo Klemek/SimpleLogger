@@ -75,7 +75,7 @@ public class LoggerTest {
     public void testLogExceptionMessage() {
         Logger.log(new Exception("custom exception"), "custom message");
         verifyOutput(new String[]{
-                "[SEVERE][Test-LoggerTest] custom message : java.lang.Exception: custom exception",
+                "[SEVERE][Test-LoggerTest] custom message: java.lang.Exception: custom exception",
                 "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionMessage(LoggerTest.java:76)",
                 "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
         });
@@ -93,7 +93,29 @@ public class LoggerTest {
     public void testLogExceptionCustomLevelCustomMessage() {
         Logger.log(Level.WARNING, new Exception("custom exception"), "custom message");
         verifyOutput(new String[]{
-                "[WARNING][Test-LoggerTest] custom message : java.lang.Exception: custom exception"
+                "[WARNING][Test-LoggerTest] custom message: java.lang.Exception: custom exception"
+        });
+    }
+
+    @Test
+    public void testLogExceptionCause() {
+        Logger.log(new Exception("custom exception", new Exception("custom cause")));
+        verifyOutput(new String[]{
+                "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:102)",
+                "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
+                "[SEVERE][Test-LoggerTest] Caused by: java.lang.Exception: custom cause",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:102)",
+                "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
+        });
+    }
+
+    @Test
+    public void testLogExceptionCauseCustomLevel() {
+        Logger.log(Level.WARNING, new Exception("custom exception", new Exception("custom cause")));
+        verifyOutput(new String[]{
+                "[WARNING][Test-LoggerTest] java.lang.Exception: custom exception",
+                "[WARNING][Test-LoggerTest] Caused by: java.lang.Exception: custom cause",
         });
     }
 

@@ -1,11 +1,11 @@
 # Simple Logger
 A simple but useful Java logger to use everywhere.
 
-Current version v1.2.1
+Current version v1.3
 
 ## Download
 
-* [simple-logger-1.2.1.jar](../../raw/master/download/simple-logger-1.2.1.jar)
+* [simple-logger-1.3.jar](../../raw/master/download/simple-logger-1.3.jar)
 
 ## How to use
 
