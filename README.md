@@ -1,11 +1,11 @@
 # Simple Logger
 A simple but useful Java logger to use everywhere.
 
-Current version v1.3
+Current version v1.3.1
 
 ## Download
 
-* [simple-logger-1.3.jar](../../raw/master/download/simple-logger-1.3.jar)
+* [simple-logger-1.3.1.jar](../../raw/master/download/simple-logger-1.3.1.jar)
 
 ## How to use
 
@@ -85,7 +85,7 @@ You can use this project as a maven dependency with this :
     <dependency>
         <groupId>fr.klemek</groupId>
         <artifactId>simple-logger</artifactId>
-        <version>1.2.1</version>
+        <version>1.3.1</version>
     </dependency>
 </dependencies>
 ```

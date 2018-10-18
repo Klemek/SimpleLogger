@@ -169,6 +169,8 @@ public final class Logger {
             initialized = true;
             Logger.log(Level.WARNING, "Logger was not initialized please do so before using.");
         }
+        if (lvl.intValue() < appLogger.getLevel().intValue())
+            return;
         message = String.format("[%s-%s] %s", appName, Utils.getCallingClassName(depth), message);
         appLogger.log(lvl, message, objects);
         if (objects.length > 0 && objects[0] instanceof Throwable) {
