@@ -19,8 +19,8 @@ import static org.junit.Assert.fail;
 public class LoggerTest {
 
     private static Path output = new File("output.log").toPath();
-    private static int majorJavaVersion = LoggerTest.getMajorJavaVersion();
-    private static String internalPackage = majorJavaVersion <= 8 ? "sun" : "java.base/jdk.internal";
+    private static double javaVersion = Double.parseDouble(System.getProperty("java.specification.version"));
+    private static String internalPackage = javaVersion <= 8 ? "sun" : "java.base/jdk.internal";
 
     @Test
     public void testLogException() {
@@ -97,12 +97,6 @@ public class LoggerTest {
         });
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-        System.out.println("Java major version is " + majorJavaVersion);
-        System.out.println("internalPackage is " + internalPackage);
-    }
-
     @Test
     public void testLogExceptionCustomLevel() {
         Logger.log(Level.WARNING, new Exception("custom exception"));
@@ -117,11 +111,6 @@ public class LoggerTest {
         verifyOutput(new String[]{
                 "[WARNING][Test-LoggerTest] custom message: java.lang.Exception: custom exception"
         });
-    }
-
-    private static int getMajorJavaVersion() {
-        String[] javaVersionElements = System.getProperty("java.version").split("\\.");
-        return Integer.parseInt(javaVersionElements[1]);
     }
 
     @Test
@@ -175,6 +164,12 @@ public class LoggerTest {
             e.printStackTrace();
             fail("error when accessing output file");
         }
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+        System.out.println("Java major version is " + javaVersion);
+        System.out.println("internalPackage is " + internalPackage);
     }
 
 }
