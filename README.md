@@ -1,13 +1,15 @@
 # Simple Logger
-[![Build Status](https://travis-ci.org/Klemek/SimpleLogger.svg?branch=master)](https://travis-ci.org/Klemek/SimpleLogger)
-
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.klemek/simple-logger.svg)](https://search.maven.org/search?q=g:%22com.github.klemek%22%20AND%20a:%22simple-logger%22)
+[![Build Status](https://img.shields.io/travis/Klemek/SimpleLogger.svg?style=popout)](https://travis-ci.org/Klemek/SimpleLogger)
+[![Coverage Status](https://img.shields.io/coveralls/github/Klemek/SimpleLogger.svg)](https://coveralls.io/github/Klemek/SimpleLogger?branch=master)
+![License](https://img.shields.io/github/license/Klemek/SimpleLogger.svg)
 A simple but useful Java logger to use everywhere.
 
 Current version v1.3.1
 
 ## Download
 
-* [simple-logger-1.3.1.jar](../../raw/master/download/simple-logger-1.3.1.jar)
+[simple-logger-1.3.1.jar](../../releases/download/simple-logger-1.3.1/simple-logger-1.3.1.jar)
 
 ## How to use
 
@@ -74,20 +76,9 @@ This will show the following :
 
 You can use this project as a maven dependency with this :
 ```XML
-<repositories>
-    ...
-    <repository>
-        <id>fr.klemek</id>
-        <url>https://github.com/klemek/mvn-repo/raw/master</url>
-    </repository>
-</repositories>
-...
-<dependencies>
-    ...
-    <dependency>
-        <groupId>fr.klemek</groupId>
-        <artifactId>simple-logger</artifactId>
-        <version>1.3.1</version>
-    </dependency>
-</dependencies>
+<dependency>
+    <groupId>com.github.klemek</groupId>
+    <artifactId>simple-logger</artifactId>
+    <version>1.3.1</version>
+</dependency>
 ```
