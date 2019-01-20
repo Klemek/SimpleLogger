@@ -10,7 +10,7 @@ Current version v1.3.1
 
 ## Download
 
-[simple-logger-1.3.1.jar](../../releases/download/simple-logger-1.3.1/simple-logger-1.3.1.jar)
+[simplelogger-1.3.1.jar](../../releases/download/simplelogger-1.3.1/simplelogger-1.3.1.jar)
 
 ## How to use
 
