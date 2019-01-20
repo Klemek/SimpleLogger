@@ -1,5 +1,6 @@
 # Simple Logger
 [![Build Status](https://travis-ci.org/Klemek/SimpleLogger.svg?branch=master)](https://travis-ci.org/Klemek/SimpleLogger)
+
 A simple but useful Java logger to use everywhere.
 
 Current version v1.3.1

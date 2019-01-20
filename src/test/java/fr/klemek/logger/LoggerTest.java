@@ -120,7 +120,7 @@ public class LoggerTest {
     }
 
     private static int getMajorJavaVersion() {
-        String[] javaVersionElements = System.getProperty("java.runtime.version").split("\\.|_|-b");
+        String[] javaVersionElements = System.getProperty("java.version").split("\\.");
         return Integer.parseInt(javaVersionElements[1]);
     }
 
