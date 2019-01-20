@@ -18,6 +18,18 @@ import static org.junit.Assert.fail;
 public class LoggerTest {
 
     private static Path output = new File("output.log").toPath();
+    private static int majorJavaVersion = LoggerTest.getMajorJavaVersion();
+    private static String internalPackage = majorJavaVersion <= 8 ? "sun" : "java.base/jdk.internal";
+
+    @Test
+    public void testLogException() {
+        Logger.log(new Exception("custom exception"));
+        verifyOutput(new String[]{
+                "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogException(LoggerTest.java:26)",
+                "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
+        });
+    }
 
     @Before
     public void setUp() throws IOException {
@@ -62,22 +74,25 @@ public class LoggerTest {
     }
 
     @Test
-    public void testLogException() {
-        Logger.log(new Exception("custom exception"));
-        verifyOutput(new String[]{
-                "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogException(LoggerTest.java:66)",
-                "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
-        });
-    }
-
-    @Test
     public void testLogExceptionMessage() {
         Logger.log(new Exception("custom exception"), "custom message");
         verifyOutput(new String[]{
                 "[SEVERE][Test-LoggerTest] custom message: java.lang.Exception: custom exception",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionMessage(LoggerTest.java:76)",
-                "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionMessage(LoggerTest.java:78)",
+                "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
+        });
+    }
+
+    @Test
+    public void testLogExceptionCause() {
+        Logger.log(new Exception("custom exception", new Exception("custom cause")));
+        verifyOutput(new String[]{
+                "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:88)",
+                "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
+                "[SEVERE][Test-LoggerTest] Caused by: java.lang.Exception: custom cause",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:88)",
+                "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
         });
     }
 
@@ -97,17 +112,9 @@ public class LoggerTest {
         });
     }
 
-    @Test
-    public void testLogExceptionCause() {
-        Logger.log(new Exception("custom exception", new Exception("custom cause")));
-        verifyOutput(new String[]{
-                "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:102)",
-                "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
-                "[SEVERE][Test-LoggerTest] Caused by: java.lang.Exception: custom cause",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:102)",
-                "[SEVERE][Test-LoggerTest] \t sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
-        });
+    private static int getMajorJavaVersion() {
+        String[] javaVersionElements = System.getProperty("java.runtime.version").split("\\.|_|-b");
+        return Integer.parseInt(javaVersionElements[1]);
     }
 
     @Test
