@@ -3,6 +3,7 @@
 [![Build Status](https://img.shields.io/travis/Klemek/SimpleLogger.svg?style=popout)](https://travis-ci.org/Klemek/SimpleLogger)
 [![Coverage Status](https://img.shields.io/coveralls/github/Klemek/SimpleLogger.svg)](https://coveralls.io/github/Klemek/SimpleLogger?branch=master)
 ![License](https://img.shields.io/github/license/Klemek/SimpleLogger.svg)
+
 A simple but useful Java logger to use everywhere.
 
 Current version v1.3.1
