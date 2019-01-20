@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +27,17 @@ public class LoggerTest {
         Logger.log(new Exception("custom exception"));
         verifyOutput(new String[]{
                 "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogException(LoggerTest.java:26)",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogException(LoggerTest.java:27)",
+                "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
+        });
+    }
+
+    @Test
+    public void testLogExceptionMessage() {
+        Logger.log(new Exception("custom exception"), "custom message");
+        verifyOutput(new String[]{
+                "[SEVERE][Test-LoggerTest] custom message: java.lang.Exception: custom exception",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionMessage(LoggerTest.java:37)",
                 "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
         });
     }
@@ -74,26 +85,22 @@ public class LoggerTest {
     }
 
     @Test
-    public void testLogExceptionMessage() {
-        Logger.log(new Exception("custom exception"), "custom message");
-        verifyOutput(new String[]{
-                "[SEVERE][Test-LoggerTest] custom message: java.lang.Exception: custom exception",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionMessage(LoggerTest.java:78)",
-                "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
-        });
-    }
-
-    @Test
     public void testLogExceptionCause() {
         Logger.log(new Exception("custom exception", new Exception("custom cause")));
         verifyOutput(new String[]{
                 "[SEVERE][Test-LoggerTest] java.lang.Exception: custom exception",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:88)",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:89)",
                 "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)",
                 "[SEVERE][Test-LoggerTest] Caused by: java.lang.Exception: custom cause",
-                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:88)",
+                "[SEVERE][Test-LoggerTest] \t fr.klemek.logger.LoggerTest.testLogExceptionCause(LoggerTest.java:89)",
                 "[SEVERE][Test-LoggerTest] \t " + internalPackage + ".reflect.NativeMethodAccessorImpl.invoke0(Native Method)"
         });
+    }
+
+    @BeforeClass
+    public static void setUpClass() {
+        System.out.println("Java major version is " + majorJavaVersion);
+        System.out.println("internalPackage is " + internalPackage);
     }
 
     @Test
