@@ -3,6 +3,8 @@
 [![Build Status](https://img.shields.io/travis/Klemek/SimpleLogger.svg?style=popout)](https://travis-ci.org/Klemek/SimpleLogger)
 [![Coverage Status](https://img.shields.io/coveralls/github/Klemek/SimpleLogger.svg)](https://coveralls.io/github/Klemek/SimpleLogger?branch=master)
 ![License](https://img.shields.io/github/license/Klemek/SimpleLogger.svg)
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Klemek/SimpleLogger.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Klemek/SimpleLogger/context:java)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Klemek/SimpleLogger.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Klemek/SimpleLogger/alerts/)
 
 A simple but useful Java logger to use everywhere.
 
