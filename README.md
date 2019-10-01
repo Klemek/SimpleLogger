@@ -1,6 +1,7 @@
 # Simple Logger
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.klemek/simple-logger.svg)](https://search.maven.org/search?q=g:%22com.github.klemek%22%20AND%20a:%22simplelogger%22)
 [![Build Status](https://img.shields.io/travis/Klemek/SimpleLogger.svg?style=popout)](https://travis-ci.org/Klemek/SimpleLogger)
+[![Scc Count Badge](https://sloc.xyz/github/klemek/simplelogger/?category=code)](https://github.com/boyter/scc/#badges-beta)
 [![Coverage Status](https://img.shields.io/coveralls/github/Klemek/SimpleLogger.svg)](https://coveralls.io/github/Klemek/SimpleLogger?branch=master)
 ![License](https://img.shields.io/github/license/Klemek/SimpleLogger.svg)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Klemek/SimpleLogger.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Klemek/SimpleLogger/context:java)
